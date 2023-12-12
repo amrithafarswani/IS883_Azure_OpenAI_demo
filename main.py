@@ -13,7 +13,7 @@ def generate_lyrics(artist_name, genre, subject=None, rhyme=None, temperature=0.
 
     # Modify the prompt based on the use_slang parameter
     if use_slang:
-        prompt += " You are allowed to use slang and casual language in the lyrics in this case."
+        prompt += " You should use slang language in the lyrics in this case."
 
     # Generate random positions for inserting non-lexical vocals
     positions = random.sample(range(1, 200), 5)  # Adjust the range and count as needed
@@ -47,7 +47,7 @@ genre = st.text_input("Enter the genre:")
 subject = st.text_input("Subject (Optional):", "Enter the subject for this particular song")
 rhyme = st.text_input("Rhyme (Optional):", "Enter a particular word or phrase that you would like used")
 temperature = st.slider("Select temperature", 0.1, 1.0, 0.7, 0.1)
-use_slang = st.checkbox("Allow Slang in Lyrics", value=False, key='slang_checkbox', help='Use slang and casual language in the lyrics.')
+use_slang = st.checkbox("Allow Slang in Lyrics", value=False, key='slang_checkbox', help='Use slang language in the lyrics.')
 include_non_lexical = st.checkbox("Include Non-Lexical Vocals", value=False, key='non_lexical_checkbox', help='Include some non-lexical vocals in the lyrics.')
 specific_non_lexical = st.text_input("Specific Non-Lexical Vocal (Optional):", "Enter a specific non-lexical vocal")
 
