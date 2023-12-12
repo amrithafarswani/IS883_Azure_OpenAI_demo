@@ -15,13 +15,13 @@ def generate_lyrics(artist_name, genre, subject=None, rhyme=None, temperature=0.
     if use_slang:
         prompt += " You are allowed to use slang and casual language in the lyrics in this case."
 
-    # Generate random positions for inserting non-lexical vocals
-    positions = random.sample(range(1, 200), 5)  # Adjust the range and count as needed
-
     # Include non-lexical vocals in the prompt if the toggle button is enabled
-    if include_non_lexical and specific_non_lexical:
-        for position in positions:
-            prompt = prompt[:position] + f" {specific_non_lexical} {prompt[position:]}"  # Use the user-specified non-lexical vocal
+    if include_non_lexical:
+        prompt += " Include some non-lexical vocals (e.g., lalalaaa) in the lyrics."
+
+        # Include a specific non-lexical vocal if provided
+        if specific_non_lexical:
+            prompt += f" Use '{specific_non_lexical}' as a non-lexical vocal."
 
     # Generate lyrics using OpenAI GPT-3
     response = openai.Completion.create(
@@ -32,6 +32,7 @@ def generate_lyrics(artist_name, genre, subject=None, rhyme=None, temperature=0.
     )
 
     generated_lyric = response['choices'][0]['text']
+
     return generated_lyric
 
 # Streamlit app
